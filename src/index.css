@@ -38,10 +38,6 @@ code {
 }
 /**/
 
-#vga {
-  background-color: #000;
-  touch-action: none;
-}
 
 canvas {
   overflow-clip-margin: content-box;

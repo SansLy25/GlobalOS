@@ -19,13 +19,25 @@ const Emulator = () => {
         console.log(config.loadType, config.imageUrl);
         window.emulator = new window.V86({
             wasm_path: '/v86.wasm',
-            screen_container: document.getElementById("screen_container"),
+            screen: {
+                container: document.getElementById("screen_container"),
+                use_graphical_text: false,
+            },
             bios: {url: '/bios/seabios.bin'},
             vga_bios: {url: '/bios/vgabios.bin'},
-            boot_order: '0x123',
-            memory_size: 128 * 1024 * 1024,
-            vga_memory_size: 8 * 1024 * 1024,
-            [config.loadType]: {url: config.imageUrl},
+            boot_order: 0,
+            disable_audio: false,
+            disable_jit: false,
+            acpi: false,
+            memory_size: 256 * 1024 * 1024,
+            vga_memory_size: 16 * 1024 * 1024,
+            filesystem: {},
+            mac_address_translation: false,
+            cpuid_level: undefined,
+            initial_state: undefined,
+            [config.loadType]: {
+                url: config.imageUrl,
+            },
             autostart: true,
         });
 
@@ -61,7 +73,7 @@ const Emulator = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-gray-100 flex flex-col">
+        <div className="min-h-screen bg-gray-100 flex flex-col" style={{overflowY: "scroll"}}>
             <Header/>
             <div className="flex items-center justify-center">
                 <div className="flex flex-row pt-3 p-9">
