@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState, useRef} from 'react';
+import React, {useCallback, useEffect, useLayoutEffect, useState, useRef} from 'react';
 import {Expand, RefreshCcw, ArrowDownFromLine, ArrowUpFromLine, Info} from 'lucide-react';
 import SpinBox from "../UI/input/SpinBox";
 import CheckBox from "../UI/input/CheckBox";
@@ -28,6 +28,7 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
         const [hideMouseOnHover, setHideMouseOnHover] = useState(false);
         const [scaleX, setScaleX] = useState(defaultScaleX);
         const [scaleY, setScaleY] = useState(defaultScaleY);
+        const [stateOnLoad, setStateOnLoad] = useState(false);
         const [mouseIsEnabled, setMouseIsEnabled] = useState(true);
         const [soundIsEnabled, setSoundIsEnabled] = useState(true);
         const [infoIsEnabled, setInfoIsEnabled] = useState(false);
@@ -36,10 +37,12 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
         const hiddenStateInputRef = useRef(null);
 
 
-        useEffect(() => {
+        useLayoutEffect(() => {
             const container = emulatorContainerRef.current;
-            if (!container || !emulatorRef.current) return;
-
+            if (!emulatorContainerRef.current || !emulatorRef.current) {
+                console.log("Refs not ready!");
+                return;
+            }
             container.addEventListener('click', onEmulatorClick);
 
             if (hideMouseOnHover) {
@@ -52,7 +55,7 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
             return () => {
                 container.removeEventListener('click', onEmulatorClick);
             };
-        }, [mouseIsEnabled, hideMouseOnHover, scaleX, scaleY]);
+        }, [mouseIsEnabled, hideMouseOnHover, scaleX, scaleY, stateOnLoad]);
 
         const onEmulatorClick = () => {
             let emulator = emulatorRef.current;
@@ -126,6 +129,9 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
             }
         };
 
+        useEffect(() => {
+            setStateOnLoad(true);
+        }, [])
 
         return (
             <aside className="bg-white p-6 rounded-lg shadow-md md:shadow-none md:w-72 lg:w-80 hidden md:block">
@@ -137,7 +143,7 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
                         </button>
                     </div>
                 </div>
-                { !infoIsEnabled ?
+                {!infoIsEnabled ?
                     <div>
                         <div className="mb-6">
                             <div className="grid grid-cols-2 gap-3">

@@ -65,6 +65,8 @@ const Emulator = () => {
             });
         });
 
+        setScale(config.defaultScaleX, config.defaultScaleY)
+
         return () => {
             if (emulatorRef.current) {
                 emulatorRef.current.destroy();
