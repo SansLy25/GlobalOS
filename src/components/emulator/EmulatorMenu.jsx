@@ -40,7 +40,6 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
         useLayoutEffect(() => {
             const container = emulatorContainerRef.current;
             if (!emulatorContainerRef.current || !emulatorRef.current) {
-                console.log("Refs not ready!");
                 return;
             }
             container.addEventListener('click', onEmulatorClick);
@@ -158,7 +157,6 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
                                         const newScaleY = parseFloat(e.target.value);
                                         setScaleY(newScaleY);
                                         setEmulatorScale(scaleX, newScaleY);
-                                        e.target.blur()
                                     }}
                                 />
                                 <SpinBox
@@ -172,7 +170,6 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
                                         const newScaleX = parseFloat(e.target.value);
                                         setScaleX(newScaleX);
                                         setEmulatorScale(newScaleX, scaleY);
-                                        e.target.blur()
                                     }}
                                 />
                             </div>
@@ -197,7 +194,7 @@ const EmulatorMenu = ({emulatorRef, emulatorContainerRef, emulatorConfig}) => {
                                     checked={soundIsEnabled}
                                     onChange={(e) => {
                                         setSoundIsEnabled(e.target.checked);
-                                        emulatorRef.current.speaker_adapter.mixer.set_volume(Number(soundIsEnabled), undefined);
+                                        emulatorRef.current.speaker_adapter.mixer.set_volume(!Number(soundIsEnabled), undefined);
                                         e.target.blur()
                                     }}
                                 />

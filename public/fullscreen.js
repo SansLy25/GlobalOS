@@ -39,5 +39,3 @@ document.addEventListener('fullscreenchange', handleFullscreenChange);
 document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 document.addEventListener('mozfullscreenchange', handleFullscreenChange);
 document.addEventListener('MSFullscreenChange', handleFullscreenChange);
-
-console.log("Скрипт отслеживания полноэкранного режима активирован.");

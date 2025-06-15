@@ -16,7 +16,6 @@ const Emulator = () => {
     };
 
     const createEmulator = (config) => {
-        console.log(config.loadType, config.imageUrl);
         window.emulator = new window.V86({
             wasm_path: '/v86.wasm',
             screen: {

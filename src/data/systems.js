@@ -69,7 +69,7 @@ export const systems = [{
     imageUrl: "/machines/dsl.iso",
     interfaceType: "GUI",
     loadType: "cdrom",
-    description: "ОС, созданная для процессоров Intel 8086, является прародителем классической DOS, Microsoft купила ее и адапатировала для IBM PC",
+    description: "Damn Small Linux — дистрибутив Linux на основе Debian для архитектуры x86, загружаемый с LiveCD-«визитки». Также он может быть установлен на жёсткий диск, USB Flash Drive и т. п. Создавался для использования на старых компьютерах, поэтому имеет низкие требования к процессору и оперативной памяти и маленький размер (50 мегабайт).",
     defaultScaleX: 1,
     defaultScaleY: 1,
 
